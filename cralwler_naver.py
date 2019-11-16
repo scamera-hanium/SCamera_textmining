@@ -12,8 +12,8 @@ from itertools import count
 def get_api_result(keyword, display, start):
     url = "https://openapi.naver.com/v1/search/blog?query=" + keyword + "&display=" + str(display) + "&start=" + str(start)
     result = requests.get(urlparse(url).geturl(),
-                          headers={"X-Naver-Client-Id": "wYRlTYlyvgQCJJ3lxZzo",
-                                   "X-Naver-Client-Secret": "B0cwT7BY6j"})
+                          headers={"X-Naver-Client-Id": "Secret",
+                                   "X-Naver-Client-Secret": "Secret"})
 
     return result.json()
 

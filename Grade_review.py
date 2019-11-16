@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*
 
 import sys
-sys.path.insert(0, '/Users/davichiar/Documents/ADDAVICHI/Python/Sentimental-Analysis-master/Bidirectional_LSTM')
-
 import os
 import tensorflow as tf
 import Bi_LSTM
@@ -32,8 +30,6 @@ with tf.variable_scope("loss", reuse = tf.AUTO_REUSE):
 
 prediction = tf.nn.softmax(logits)
 
-os.chdir("/Users/davichiar/Documents/ADDAVICHI/Python/Sentimental-Analysis-master/Bidirectional_LSTM")
-
 def Convert2Vec(model_name, sentence):
     word_vec = []
     sub = []
@@ -45,8 +41,6 @@ def Convert2Vec(model_name, sentence):
             sub.append(np.random.uniform(-0.25,0.25,300)) ## used for OOV words
     word_vec.append(sub)
     return word_vec
-
-
 
 saver = tf.train.Saver()
 init = tf.global_variables_initializer()

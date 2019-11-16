@@ -14,7 +14,7 @@ def init(conn, text):
     file=open('context.txt','w')
     for x in range(len(title_array)):
         print("================================================================")
-        print("번호 : " + str(x))
+        print("번호 : " + str(x+1))
         print("제목 : " + title_array[x])
         print("링크 : " + link_array[x])
         print("이미지 링크 : " + img_array[x])
@@ -23,16 +23,16 @@ def init(conn, text):
         print("날짜 : " + str(date_array[x]))
         print("닉네임 : " + nicname_array[x])
 
-        add_count = data_array[x].count('후원') + data_array[x].count('무료') + data_array[x].count('광고') + data_array[x].count('업체') + data_array[x].count('제공')
+        add_count = data_array[x].count('후원') + data_array[x].count('무료') + data_array[x].count('광고') + data_array[x].count('업체') + data_array[x].count('제공') + data_array[x].count('이벤트') + data_array[x].count('원고')
         if(int(img_numx[x]) >= 15):
             add_array.append('사진 광고')
             print("광고 여부 : " + add_array[x])
 
-        elif(add_count >= 4):
+        elif(add_count >= 3):
             add_array.append('업체 광고')
             print("광고 여부 : " + add_array[x])
 
-        elif(nicname_array.count(nicname_array[x]) >= 4):
+        elif(nicname_array.count(nicname_array[x]) >= 3):
             add_array.append('닉네임 광고')
             print("광고 여부 : " + add_array[x])
 
@@ -50,6 +50,7 @@ def init(conn, text):
             try:
                 file.write(data_array[x] + '\n')
                 check = Grade_review.Grade(title_array[x] + context_array[x])
+                # check = Grade_review.Grade(data_array[x])
                 check_array.append(check)
             except:
                 check_array.append('중립')
