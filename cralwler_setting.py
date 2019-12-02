@@ -23,12 +23,12 @@ def init(conn, text):
         print("날짜 : " + str(date_array[x]))
         print("닉네임 : " + nicname_array[x])
 
-        add_count = data_array[x].count('후원') + data_array[x].count('무료') + data_array[x].count('광고') + data_array[x].count('업체') + data_array[x].count('제공') + data_array[x].count('이벤트') + data_array[x].count('원고')
-        if(int(img_numx[x]) >= 15):
+        add_count = data_array[x].count('후원')*2 + data_array[x].count('상품보기')*2 + data_array[x].count('상품 보기')*2 + data_array[x].count('무료') + data_array[x].count('광고') + data_array[x].count('업체')*2 + data_array[x].count('제공')*2 + data_array[x].count('이벤트') + data_array[x].count('원고')*2 + data_array[x].count('리워드')*2 + data_array[x].count('수수료') + data_array[x].count('판매') + data_array[x].count('번개장터')*2 + data_array[x].count('번개 장터')*2 +data_array[x].count('커미션')*2 + data_array[x].count('제휴')*2 + data_array[x].count('지급') + data_array[x].count('추천인')*2 + data_array[x].count('적립금') + data_array[x].count('링크') + data_array[x].count('가입')*2 + data_array[x].count('마케팅')*2 + data_array[x].count('스폰서')*2 + data_array[x].count('쿠팡')*2
+        if(int(img_numx[x]) >= 30):
             add_array.append('사진 광고')
             print("광고 여부 : " + add_array[x])
 
-        elif(add_count >= 3):
+        elif(add_count >= 2):
             add_array.append('업체 광고')
             print("광고 여부 : " + add_array[x])
 
@@ -36,7 +36,7 @@ def init(conn, text):
             add_array.append('닉네임 광고')
             print("광고 여부 : " + add_array[x])
 
-        elif(len(data_array[x]) >= 1000):
+        elif(len(data_array[x]) >= 2500):
             add_array.append('글 광고')
             print("광고 여부 : " + add_array[x])
         
@@ -49,8 +49,9 @@ def init(conn, text):
         if(add_array[x] == '청정'):
             try:
                 file.write(data_array[x] + '\n')
-                check = Grade_review.Grade(title_array[x] + context_array[x])
+                # check = Grade_review.Grade(title_array[x] + context_array[x])
                 # check = Grade_review.Grade(data_array[x])
+                check = Grade_review.Grade(title_array[x] + context_array[x] + data_array[x])
                 check_array.append(check)
             except:
                 check_array.append('중립')
@@ -85,10 +86,16 @@ def init(conn, text):
 
     Visual_review.visual_main()
     file=open('count.txt','r')
-    for x in range(3):
+    for x in range(20):
         count_array.append( file.readline().split('\n')[0] )
     file.close()
-    print(count_array)
-    db_context.update_set(conn, str(count_array))
+
+    temp_array = []
+    for x in count_array:
+        if text.count(x.split()[0]) == 0:
+            temp_array.append(x)
+
+    print(temp_array)
+    db_context.update_set(conn, str(temp_array))
     print("")
 

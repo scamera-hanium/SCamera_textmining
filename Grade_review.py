@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*
 
 import sys
+sys.path.insert(0, '/Users/davichiar/Documents/ADDAVICHI/Python/Sentimental-Analysis-master/Bidirectional_LSTM')
+
 import os
 import tensorflow as tf
 import Bi_LSTM
@@ -12,7 +14,7 @@ W2V = Word2Vec.Word2Vec()
 
 Batch_size = 1
 Vector_size = 300
-Maxseq_length = 95
+Maxseq_length = 2600
 learning_rate = 0.001
 lstm_units = 128
 num_class = 2
@@ -29,6 +31,8 @@ with tf.variable_scope("loss", reuse = tf.AUTO_REUSE):
     loss, optimizer = BiLSTM.model_build(logits, Y, learning_rate)
 
 prediction = tf.nn.softmax(logits)
+
+os.chdir("/Users/davichiar/Documents/ADDAVICHI/Python/Sentimental-Analysis-master/Bidirectional_LSTM")
 
 def Convert2Vec(model_name, sentence):
     word_vec = []
